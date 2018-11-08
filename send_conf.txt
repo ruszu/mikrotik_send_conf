@@ -1,0 +1,7 @@
+:local hostname [/system identity get name];
+:local time [/system clock get time];
+:local date ([:pick [/system clock get date] 0 3]  . [:pick [/system clock get date] 4 6] . [:pick [/system clock get date] 7 11]);
+:local filename "$hostname-$date-$time";
+/export file="$filename";
+:delay 10s; 
+/tool e-mail send to="mikrotik@usi.ua" subject="Configuration-$hostname" file="$filename.rsc"
